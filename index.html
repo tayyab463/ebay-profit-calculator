@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>eBay Product Hunting &amp; Profit Calculator</title>
+<link rel="icon" type="image/png" href="favicon.jpg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="promo" id="promo"></header>
+
+<main class="wrap">
+  <div class="topbar">
+    <div>
+      <h1>eBay Profit Calculator</h1>
+      <p class="muted">Check fees, profit and ROI before you buy.</p>
+    </div>
+    <div class="actions">
+      <button class="btn ghost" id="themeBtn" title="Toggle dark / light mode">🌓 Theme</button>
+      <button class="btn ghost" id="printBtn">🖨 Print</button>
+      <button class="btn ghost" id="resetBtn">↺ Reset</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- INPUTS -->
+    <section class="card" id="inputs">
+      <h2>Product details</h2>
+      <div class="row2">
+        <label class="f">Product name
+          <input id="name" type="text" placeholder="e.g. Wireless earbuds">
+        </label>
+        <label class="f">Marketplace
+          <select id="market"></select>
+        </label>
+      </div>
+      <label class="f">Product URL
+        <input id="url" type="url" placeholder="https://...">
+      </label>
+
+      <div class="row2">
+        <label class="f">Selling price <i class="tip" data-tip="What the buyer pays you for the item (excluding shipping charged to the buyer).">?</i>
+          <div class="money"><span class="cur"></span><input id="price" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div>
+        </label>
+        <label class="f">Product cost <i class="tip" data-tip="What you pay to buy or source the item.">?</i>
+          <div class="money"><span class="cur"></span><input id="cost" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div>
+        </label>
+        <label class="f">Shipping cost <i class="tip" data-tip="What you pay to ship the item to the buyer.">?</i>
+          <div class="money"><span class="cur"></span><input id="ship" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div>
+        </label>
+        <label class="f">Other cost <i class="tip" data-tip="Packaging, returns allowance, supplier fees, etc.">?</i>
+          <div class="money"><span class="cur"></span><input id="other" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div>
+        </label>
+      </div>
+
+      <div class="f">Promoted listing ad rate <i class="tip" data-tip="Percent of the selling price you pay eBay when the ad leads to a sale.">?</i>
+        <div class="chips" id="adChips"></div>
+        <div class="money pct"><input id="ad" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="Custom %"><span class="cur">%</span></div>
+      </div>
+
+      <label class="f">Notes
+        <textarea id="notes" rows="2" placeholder="Supplier, competition, sales history..."></textarea>
+      </label>
+
+      <details class="fees">
+        <summary>Fee settings <span class="muted" id="feeLabel"></span></summary>
+        <div class="row3">
+          <label class="f">eBay fee %<input id="feePct" type="number" min="0" max="100" step="0.01"></label>
+          <label class="f">Fixed fee<input id="fixed" type="number" min="0" step="0.01"></label>
+          <label class="f"><span id="taxName">Tax</span> % <i class="tip" data-tip="Applied on eBay fees.">?</i><input id="taxPct" type="number" min="0" max="100" step="0.01"></label>
+        </div>
+      </details>
+      <p class="error" id="msg" role="alert"></p>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="results">
+      <div class="card verdict" id="verdict">
+        <div class="vbadge" id="vBadge">—</div>
+        <div>
+          <div class="vtitle" id="vTitle">Enter a selling price</div>
+          <div class="muted" id="vSub">Results update as you type.</div>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="card kpi"><span class="muted">Net profit</span><b id="kProfit">—</b></div>
+        <div class="card kpi"><span class="muted">Margin</span><b id="kMargin">—</b></div>
+        <div class="card kpi"><span class="muted">ROI</span><b id="kRoi">—</b></div>
+      </div>
+
+      <div class="card">
+        <h2>Fee &amp; profit breakdown</h2>
+        <div class="bar" id="bar"></div>
+        <div class="legend" id="legend"></div>
+        <table class="tbl" id="breakdown"></table>
+      </div>
+
+      <div class="card">
+        <h2>Product analysis</h2>
+        <ul class="insights" id="insights"></ul>
+        <div class="actions">
+          <button class="btn primary" id="saveBtn">＋ Save product</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SAVED -->
+  <section class="card" id="savedCard">
+    <div class="topbar">
+      <h2>Saved products <span class="muted" id="count"></span></h2>
+      <div class="actions">
+        <button class="btn ghost" id="compareBtn">⇄ Compare selected</button>
+        <button class="btn ghost" id="csvBtn">⬇ Export CSV</button>
+        <button class="btn ghost danger" id="clearBtn">Delete all</button>
+      </div>
+    </div>
+    <div id="saved"></div>
+    <div id="compare"></div>
+  </section>
+</main>
+
+<footer class="foot" id="foot"></footer>
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
